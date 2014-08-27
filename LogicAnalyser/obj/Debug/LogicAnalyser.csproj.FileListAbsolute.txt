@@ -1,0 +1,5 @@
+C:\dev\tom\logic_analyser\LogicAnalyser\bin\Debug\LogicAnalyser.dll
+C:\dev\tom\logic_analyser\LogicAnalyser\bin\Debug\LogicAnalyser.pdb
+C:\dev\tom\logic_analyser\LogicAnalyser\obj\Debug\LogicAnalyser.dll
+C:\dev\tom\logic_analyser\LogicAnalyser\obj\Debug\LogicAnalyser.pdb
+C:\dev\tom\logic_analyser\LogicAnalyser\obj\Debug\LogicAnalyser.csprojResolveAssemblyReference.cache

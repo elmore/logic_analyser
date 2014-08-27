@@ -1,0 +1,28 @@
+﻿@model LogicAnalyser.UI.Models.VisualiserViewModel
+
+
+<h1>Visualiser</h1>
+
+
+
+<table>
+    <tr>
+        <th></th>
+        @foreach (string header in @Model.Headings)
+        {
+            <th>@header</th>
+        }
+    </tr>
+
+    @foreach (LogicAnalyser.UI.Models.Row row in @Model.Rows)
+    {
+        <tr>
+            <td>@row.Name</td>
+
+            @foreach (string result in row.Fields)
+            {
+                <td>@result</td>
+            }
+        </tr>
+    }
+</table>
