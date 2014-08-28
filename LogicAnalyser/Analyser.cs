@@ -52,40 +52,59 @@ namespace LogicAnalyser
             return results;
         }
 
-
-        private List<TestCase> MakeTestCases(List<Argument> args, List<TestCase> suite = null, TestCase testCase = null, int depth = 0)
+        /// <summary>
+        /// This is a recursing method which takes a list which is effectively a multi-dimensional array. It treats it as 
+        /// a tree structure which defines all possible combinations of test cases. It flattens the structure to a list 
+        /// with an element per valid path through the tree.
+        /// </summary>
+        /// <param name="args">a list of the arguments that need to be permutated to get all possible test cases</param>
+        /// <returns>a flat list of the TestCases that need to be run</returns>
+        private List<TestCase> MakeTestCases(List<Argument> args)
         {
-            testCase = testCase ?? new TestCase();
+            // new list for each layer of the tree
+            List<TestCase> nt = new List<TestCase>();
 
-            suite = suite ?? new List<TestCase>();
-
+            // represents a real node. 
+            // if the list is empty then we have dropped off the bottom
             if (args.Count > 0)
             {
+                // this is essentially just popping the firstArgument off the 
+                // args list..
                 var firstArgument = args.First();
 
+                // ... leaving remainingArguments as everything else
+                var remainingArguments = args.Skip(1).ToList();
+
+                // ask the argument for the possible variations eg for a bool it 
+                // will return the list new { true, false }
                 foreach (Object val in firstArgument.GetVariations())
                 {
-                    if (depth == 0)
-                    {
-                        // root
+                    // get the test case list from lower nodes. there is a test 
+                    // case per path to a leaf. if nothing is below this will 
+                    // return a list with one empty test case.
+                    List<TestCase> subNodes = MakeTestCases(remainingArguments);
 
-                        //testCase = new TestCase();
+                    // for each path add in this node to the test case. we are 
+                    // working back up the tree
+                    foreach (TestCase tc in subNodes)
+                    {
+                        tc.Add(firstArgument, val);
                     }
 
-                    testCase.Add(firstArgument, val);
-
-                    MakeTestCases(args.Skip(1).ToList(), suite, testCase, depth + 1);
-
-                    testCase = new TestCase();
+                    // add the paths to our collection
+                    nt.AddRange(subNodes);
                 }
             }
+            // if the list is empty we want to create a TestCase and return it 
+            // since this represents one valid path through the tree.
             else
             {
-                // leaf
-                suite.Add(testCase);
+                nt.Add( new TestCase() );
             }
 
-            return suite;
+            // always return a list even if its a single test case as in the case of
+            // dropping off the bottom of the tree
+            return nt;
         }
 
     }
