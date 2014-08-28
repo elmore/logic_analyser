@@ -22,7 +22,7 @@ namespace LogicAnalyser
 
             foreach (var el in this)
             {
-                sb.AppendFormat("{0} : '{1}'", el.Key, Stringify(el.Value));
+                sb.AppendFormat("({0} : '{1}') ", el.Key, Stringify(el.Value));
             }
 
             return sb.ToString();

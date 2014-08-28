@@ -11,9 +11,9 @@ namespace LogicAnalyser.UI.Controllers
     {
         public ActionResult Index()
         {
-            IAnalysable sut = new Logic();
+            List<SystemContainer> testObjects = Loader.FindTestObjects();
 
-            var anyalsyer = new Analyser(sut);
+            var anyalsyer = new Analyser(testObjects.First());
 
             Results results = anyalsyer.AllPermutations();
 
