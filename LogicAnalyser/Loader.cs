@@ -57,14 +57,19 @@ namespace LogicAnalyser
             return WrapObjects(toTest);
         }
 
-        public static FieldInfo[] GetAttributes<T>(Type type)
+        public static FieldInfo[] GetFields<T>(Type type)
         {
             return type.GetFields(BindingFlags.NonPublic
                                 | BindingFlags.Public
                                 | BindingFlags.Static
                                 | BindingFlags.Instance)
-                    .Where(f => f.GetCustomAttributes(true).OfType<T>().Any())
+                    .Where(f => GetAttributes<T>(f).Any())
                     .ToArray();
+        }
+
+        public static IEnumerable<T> GetAttributes<T>(FieldInfo field)
+        {
+            return field.GetCustomAttributes(true).OfType<T>();
         }
     }
 }

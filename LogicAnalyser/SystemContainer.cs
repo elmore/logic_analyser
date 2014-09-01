@@ -25,22 +25,32 @@ namespace LogicAnalyser
 
         public List<Argument> GetInputs()
         {
-            FieldInfo[] info = Loader.GetAttributes<Input>(_Type);
+            FieldInfo[] info = Loader.GetFields<Input>(_Type);
 
             return info.Select(i => i.GetValue(_Sut) as Argument).ToList();
-            //return info.Select(i => WrapField(i.GetValue(_Sut), i.Name)).ToList();
+            //return info.Select(WrapField).ToList();
         }
 
         public List<Argument> GetOutputs()
         {
-            FieldInfo[] info = Loader.GetAttributes<Output>(_Type);
+            FieldInfo[] info = Loader.GetFields<Output>(_Type);
 
             return info.Select(i => i.GetValue(_Sut) as Argument).ToList();
         }
 
-        private Argument WrapField(Type obj, string name)
-        {
-            return new Argument(obj, name);
-        }
+        //private Argument WrapField(FieldInfo field)
+        //{
+        //    var attributes = field.GetCustomAttributes(true).OfType<Input>();
+
+
+        //    attributes.First().
+
+
+        //    var arg = new Argument(inputField.Type, inputField.Name);
+
+        //    arg.Set(field.GetValue(_Sut));
+
+        //    return arg;
+        //}
     }
 }
