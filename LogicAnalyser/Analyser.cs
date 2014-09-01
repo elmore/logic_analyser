@@ -16,15 +16,15 @@ namespace LogicAnalyser
 
         public Results AllPermutations()
         {
-            List<IArgument> inputs = _system.GetInputs();
-            List<IArgument> outputs = _system.GetOutputs();
+            List<Proxy> inputs = _system.GetInputs();
+            List<Proxy> outputs = _system.GetOutputs();
 
             List<TestCase> testCases = MakeTestCases(inputs);
 
             return RunTestCases(testCases, outputs, inputs);
         }
 
-        private Results RunTestCases(List<TestCase> testCases, List<IArgument> outputs, List<IArgument> inputs)
+        private Results RunTestCases(List<TestCase> testCases, List<Proxy> outputs, List<Proxy> inputs)
         {
             var results = new Results();
 
@@ -41,7 +41,7 @@ namespace LogicAnalyser
 
                 testResult.TestCase = test;
 
-                foreach (IArgument outputArg in outputs)
+                foreach (Proxy outputArg in outputs)
                 {
                     testResult.Add(outputArg.Name, outputArg.Get());
                 }
@@ -59,7 +59,7 @@ namespace LogicAnalyser
         /// </summary>
         /// <param name="args">a list of the arguments that need to be permutated to get all possible test cases</param>
         /// <returns>a flat list of the TestCases that need to be run</returns>
-        private List<TestCase> MakeTestCases(List<IArgument> args)
+        private List<TestCase> MakeTestCases(List<Proxy> args)
         {
             // new list for each layer of the tree
             List<TestCase> nt = new List<TestCase>();

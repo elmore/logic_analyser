@@ -42,9 +42,7 @@
     <Compile Include="Analyser.cs" />
     <Compile Include="IParameter.cs" />
     <Compile Include="Proxy.cs" />
-    <Compile Include="Argument.cs" />
     <Compile Include="IAnalysable.cs" />
-    <Compile Include="IArgument.cs" />
     <Compile Include="Loader.cs" />
     <Compile Include="SystemContainer.cs" />
     <Compile Include="UnderTest.cs" />

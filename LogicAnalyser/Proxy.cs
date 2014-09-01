@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LogicAnalyser
 {
-    public class Proxy : IArgument
+    public class Proxy 
     {
         private FieldInfo _Field;
         private Object _Obj;

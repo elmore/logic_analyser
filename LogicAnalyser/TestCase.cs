@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LogicAnalyser
 {
-    public class TestCase : Dictionary<IArgument, Object>
+    public class TestCase : Dictionary<Proxy, Object>
     {
         public void Evaluate()
         {
