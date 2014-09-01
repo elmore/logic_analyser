@@ -41,7 +41,7 @@ namespace LogicAnalyser
 
                 testResult.TestCase = test;
 
-                foreach (Argument outputArg in outputs)
+                foreach (IArgument outputArg in outputs)
                 {
                     testResult.Add(outputArg.Name, outputArg.Get());
                 }

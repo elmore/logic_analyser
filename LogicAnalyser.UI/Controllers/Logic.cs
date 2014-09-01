@@ -9,27 +9,27 @@ namespace LogicAnalyser.UI.Controllers
     public class Logic : IAnalysable
     {
         [Attributes.Input(typeof(string), "Input")]
-        public Argument _input = new Argument(typeof(string), "Input");
+        public string _input = "";
 
         [Attributes.Input(typeof(bool), "Input2")]
-        private Argument _input2 = new Argument(typeof(bool), "Input2");
-
+        private bool _input2 = false;
 
         [Attributes.Output(typeof(bool), "Output")]
-        private Argument _output = new Argument(typeof(bool), "Output");
+        private string _output = "";
 
         [Attributes.Output(typeof(string), "Output2")]
-        private Argument _output2 = new Argument(typeof(string), "Output2");
+        private bool _output2 = false;
 
         private void Something(string athing)
         {
-            _output2.Set(!string.IsNullOrEmpty(athing));
-            _output.Set(_output2.Get().GetType().ToString());
+            _output2 = !string.IsNullOrEmpty(athing);
+            _output = _output2.GetType().ToString();
         }
 
         public void Run()
         {
-            Something((string)_input.Get());
+            Something(_input);
         }
+
     }
 }
