@@ -7,9 +7,9 @@ namespace LogicAnalyser
 {
     public class Analyser
     {
-        private IAnalysable _system;
+        private SystemContainer _system;
 
-        public Analyser(IAnalysable system)
+        public Analyser(SystemContainer system)
         {
             _system = system;
         }
@@ -41,7 +41,7 @@ namespace LogicAnalyser
 
                 testResult.TestCase = test;
 
-                foreach(var outputArg in outputs)
+                foreach (Argument outputArg in outputs)
                 {
                     testResult.Add(outputArg.Name, outputArg.Get());
                 }

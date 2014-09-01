@@ -5,17 +5,20 @@ using System.Text;
 
 namespace LogicAnalyser.UI.Controllers
 {
-    [LogicAnalyser.Attributes.UnderTest]
+    [Attributes.UnderTest]
     public class Logic : IAnalysable
     {
-        [LogicAnalyser.Attributes.Input(typeof(string), "Input")]
+        [Attributes.Input(typeof(string), "Input")]
         public Argument _input = new Argument(typeof(string), "Input");
-        [LogicAnalyser.Attributes.Input(typeof(bool), "Input2")]
+
+        [Attributes.Input(typeof(bool), "Input2")]
         private Argument _input2 = new Argument(typeof(bool), "Input2");
 
-        [LogicAnalyser.Attributes.Output(typeof(bool), "Output")]
+
+        [Attributes.Output(typeof(bool), "Output")]
         private Argument _output = new Argument(typeof(bool), "Output");
-        [LogicAnalyser.Attributes.Output(typeof(string), "Output2")]
+
+        [Attributes.Output(typeof(string), "Output2")]
         private Argument _output2 = new Argument(typeof(string), "Output2");
 
         private void Something(string athing)
@@ -27,16 +30,6 @@ namespace LogicAnalyser.UI.Controllers
         public void Run()
         {
             Something((string)_input.Get());
-        }
-
-        public List<Argument> GetInputs()
-        {
-            return new List<Argument> { _input, _input2 };
-        }
-
-        public List<Argument> GetOutputs()
-        {
-            return new List<Argument> { _output, _output2 };
         }
     }
 }

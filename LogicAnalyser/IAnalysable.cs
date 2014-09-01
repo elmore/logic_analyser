@@ -9,7 +9,5 @@ namespace LogicAnalyser
     public interface IAnalysable
     {
         void Run();
-        List<Argument> GetInputs();
-        List<Argument> GetOutputs();
     }
 }

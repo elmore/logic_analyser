@@ -11,7 +11,7 @@ namespace LogicAnalyser
     {
         public static Type[] GetTestibleTypes(Assembly[] assemblies)
         {
-            List<Type> typeList = new List<Type>();
+            var typeList = new List<Type>();
 
             foreach(Assembly assembly in assemblies)
             {
@@ -30,34 +30,41 @@ namespace LogicAnalyser
                             .ToArray();
         }
 
-        public static List<Object> InstantiateArray(Type[] types)
+        public static Object Instantiate(Type type)
         {
-            return types.Select(t => Activator.CreateInstance(t)).ToList();
+            return Activator.CreateInstance(type);
+        }
+
+        public static List<Object> InstantiateArray(IEnumerable<Type> types)
+        {
+            return types.Select(Instantiate).ToList();
+        }
+
+        public static List<SystemContainer> WrapObjects(IEnumerable<Type> types)
+        {
+            return types.Select(i => new SystemContainer(i)).ToList();
+        }
+
+        public static Type[] GetTestibleTypes()
+        {
+            return GetTestibleTypes(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         public static List<SystemContainer> FindTestObjects()
         {
-            var toTest = GetTestibleTypes(AppDomain.CurrentDomain.GetAssemblies());
+            var toTest = GetTestibleTypes();
 
-            List<Object> instances = InstantiateArray(toTest);
+            return WrapObjects(toTest);
+        }
 
-            return instances.Where(i => i is IAnalysable)
-                .Select(i => new SystemContainer((IAnalysable)i))
-                .ToList();
-
-
-            //foreach (var inf in toTest)
-            //{
-            //    System.Reflection.FieldInfo[] fi = inf.GetFields(System.Reflection.BindingFlags.NonPublic
-            //                                                        | System.Reflection.BindingFlags.Public
-            //                                                        | System.Reflection.BindingFlags.Static
-            //                                                        | System.Reflection.BindingFlags.Instance)
-            //                                            .Where(f => f.GetCustomAttributes(true).OfType<LogicAnalyser.Attributes.Input>().Any())
-            //                                            .ToArray();
-
-            //}
-            
-            //return 
+        public static FieldInfo[] GetAttributes<T>(Type type)
+        {
+            return type.GetFields(BindingFlags.NonPublic
+                                | BindingFlags.Public
+                                | BindingFlags.Static
+                                | BindingFlags.Instance)
+                    .Where(f => f.GetCustomAttributes(true).OfType<T>().Any())
+                    .ToArray();
         }
     }
 }
