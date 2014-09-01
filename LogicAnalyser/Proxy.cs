@@ -5,14 +5,14 @@ using System.Text;
 
 namespace LogicAnalyser
 {
-    public class Argument : IArgument
+    public class Proxy : IArgument
     {
         private object _anything;
         private Type _type;
 
         public string Name { get; private set; }
 
-        public Argument(Type type, string name)
+        public Proxy(Type type, string name)
         {
             _anything = null;
 
