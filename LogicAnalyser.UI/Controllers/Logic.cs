@@ -26,6 +26,7 @@ namespace LogicAnalyser.UI.Controllers
             _output = _output2.GetType().ToString();
         }
 
+        [Attributes.EntryPoint]
         public void Run()
         {
             Something(_input);

@@ -20,7 +20,9 @@ namespace LogicAnalyser
 
         public void Run()
         {
-            _Sut.Run();
+            MethodInfo entryPoint = Loader.GetMethods<EntryPoint>(_Type).FirstOrDefault();
+
+            entryPoint.Invoke(_Sut, null);
         }
 
         public List<Proxy> GetInputs()

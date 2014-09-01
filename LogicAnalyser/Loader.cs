@@ -65,9 +65,19 @@ namespace LogicAnalyser
                     .ToArray();
         }
 
-        public static IEnumerable<T> GetAttributes<T>(FieldInfo field)
+        public static IEnumerable<T> GetAttributes<T>(MemberInfo field)
         {
             return field.GetCustomAttributes(true).OfType<T>();
+        }
+
+        public static MethodInfo[] GetMethods<T>(Type type)
+        {
+            return type.GetMethods(BindingFlags.NonPublic
+                                | BindingFlags.Public
+                                | BindingFlags.Static
+                                | BindingFlags.Instance)
+                        .Where(m => GetAttributes<T>(m).Any())
+                        .ToArray();
         }
     }
 }
