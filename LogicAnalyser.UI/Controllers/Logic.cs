@@ -8,16 +8,16 @@ namespace LogicAnalyser.UI.Controllers
     [Attributes.UnderTest]
     public class Logic : IAnalysable
     {
-        [Attributes.Input(typeof(string), "Input")]
+        [Attributes.Input("Input")]
         public string _input = "";
 
-        [Attributes.Input(typeof(bool), "Input2")]
+        [Attributes.Input("Input2")]
         private bool _input2 = false;
 
-        [Attributes.Output(typeof(bool), "Output")]
+        [Attributes.Output("Output")]
         private string _output = "";
 
-        [Attributes.Output(typeof(string), "Output2")]
+        [Attributes.Output("Output2")]
         private bool _output2 = false;
 
         private void Something(string athing)

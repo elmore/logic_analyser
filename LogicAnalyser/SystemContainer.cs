@@ -27,7 +27,6 @@ namespace LogicAnalyser
         {
             FieldInfo[] info = Loader.GetFields<Input>(_Type);
 
-            //return info.Select(i => i.GetValue(_Sut) as IArgument).ToList();
             return info.Select(WrapField<Input>).ToList();
         }
 
@@ -35,7 +34,6 @@ namespace LogicAnalyser
         {
             FieldInfo[] info = Loader.GetFields<Output>(_Type);
 
-            //return info.Select(i => i.GetValue(_Sut) as IArgument).ToList();
             return info.Select(WrapField<Output>).ToList();
         }
 
