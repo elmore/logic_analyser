@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -57,6 +58,8 @@ namespace LogicAnalyser
 
         public static FieldInfo[] GetFields<T>(Type type)
         {
+            //return (FieldInfo[])GetMembers<T>(type.GetFields);
+
             return type.GetFields(BindingFlags.NonPublic
                                 | BindingFlags.Public
                                 | BindingFlags.Static
@@ -72,6 +75,8 @@ namespace LogicAnalyser
 
         public static MethodInfo[] GetMethods<T>(Type type)
         {
+            //return (MethodInfo[])GetMembers<T>(type.GetMethods);
+
             return type.GetMethods(BindingFlags.NonPublic
                                 | BindingFlags.Public
                                 | BindingFlags.Static
@@ -79,5 +84,15 @@ namespace LogicAnalyser
                         .Where(m => GetAttributes<T>(m).Any())
                         .ToArray();
         }
+
+        //public static MemberInfo[] GetMembers<T>(Func<BindingFlags, IEnumerable<MemberInfo>> action)
+        //{
+        //    return action(BindingFlags.NonPublic
+        //                        | BindingFlags.Public
+        //                        | BindingFlags.Static
+        //                        | BindingFlags.Instance)
+        //                .Where(m => GetAttributes<T>(m).Any())
+        //                .ToArray();
+        //}
     }
 }

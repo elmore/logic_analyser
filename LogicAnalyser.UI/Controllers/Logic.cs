@@ -23,7 +23,7 @@ namespace LogicAnalyser.UI.Controllers
         private void Something(string athing)
         {
             _output2 = !string.IsNullOrEmpty(athing);
-            _output = _output2.GetType().ToString();
+            _output = _output2.ToString();
         }
 
         [Attributes.EntryPoint]

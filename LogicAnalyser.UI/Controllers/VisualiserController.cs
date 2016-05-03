@@ -9,7 +9,7 @@ namespace LogicAnalyser.UI.Controllers
 {
     public class VisualiserController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string val)
         {
             List<SystemContainer> testObjects = Loader.FindTestObjects();
 
